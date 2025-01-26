@@ -46,15 +46,15 @@ export type NewBook = {
   thumbnail?: string;
   language?: string;
   link?: string;
-  identifier: string;
-  identifiers: {
+  identifier?: string;
+  identifiers?: {
     isbn?: string;
     libby?: string;
     librofm?: string;
     apple?: string;
   };
   notes?: string;
-  status: BookStatus;
+  status?: BookStatus;
   rating?: string;
   tags?: BookParams["tags"];
   image?: string;

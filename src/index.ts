@@ -9,6 +9,7 @@ import { summaryMarkdown } from "./summary.js";
 import returnReadFile from "./read-file.js";
 import { updateBook } from "./update-book.js";
 import { validatePayload } from "./validate-payload.js";
+import { writeBookMarkdown } from './book-writer.js';
 
 export type BookPayload = {
   date: string | undefined;
@@ -113,6 +114,7 @@ export async function read() {
 
       library = sortByDate(library);
 
+      await writeBookMarkdown(bookParams);
       await returnWriteFile(filename, library);
     }
 
