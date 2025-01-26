@@ -57,7 +57,9 @@ export async function writeBookMarkdown(book: NewBook): Promise<void> {
   //   throw new Error('Book identifier is required');
   // }
 
-  const markdownPath = path.join('_source', 'books', `${book.identifier}.md`);
+  console.log(JSON.stringify(book))
+
+  const markdownPath = path.join('_source', 'books', `${book.isbn}.md`);
   
   try {
     let content: string;
