@@ -5,7 +5,7 @@ import { lookUp } from "./utils.js";
 
 export async function updateBook(
   bookParams: BookParams,
-  currentBooks: NewBook[]
+  currentBooks: NewBook[],
 ): Promise<NewBook[]> {
   const { inputIdentifier, dateType, bookStatus, notes, rating, tags } =
     bookParams;

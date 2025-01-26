@@ -558,5 +558,60 @@
       "Thriller"
     ],
     "format": "audiobook"
+  },
+  {
+    "identifier": "9780393881448",
+    "identifiers": {
+      "isbn": "9780393881448"
+    },
+    "dateFinished": "2025-01-25",
+    "summaryEndDate": "2025-01-25",
+    "status": "finished",
+    "rating": "unrated",
+    "title": "Foolproof",
+    "authors": [
+      "Sander Van Der Linden"
+    ],
+    "publishedDate": "2023-03-21",
+    "description": "One of the world’s top experts on fighting misinformation reveals the psychology behind its power—and how we can protect ourselves. From fake news to conspiracy theories, from pandemics to politics, misinformation may be the defining problem of our era. Like a virus, misinformation infects our minds—altering our beliefs and replicating at astonishing rates. Once the virus takes hold, our primary strategies of fact-checking and debunking are an ineffective cure. In Foolproof, psychologist Sander van der Linden introduces a new paradigm for combatting what the World Health Organization has declared a worldwide “infodemic.” Synthesizing decades of social psychology studies with groundbreaking original research, he explains why our brains are so susceptible to misinformation, how it spreads across social networks, and how we can cultivate immunity. The answer is the innovative science of “prebunking”—inoculating people against misinformation by preemptively exposing them to a weakened dose and teaching them to identify and fend off its manipulative tactics. With engaging case studies and practical strategies for institutions and individuals alike, Foolproof is the definitive book on resisting nefarious persuasion.",
+    "format": "book",
+    "categories": [
+      "Psychology",
+      "Psychology / Social Psychology",
+      "Political Science / Corruption & Misconduct",
+      "Psychology / Applied Psychology"
+    ],
+    "thumbnail": "https://books.google.com/books/publisher/content?id=JmWNEAAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+    "language": "en",
+    "link": "https://books.google.com/books/about/Foolproof.html?hl=&id=JmWNEAAAQBAJ"
+  },
+  {
+    "identifier": "9781250275813",
+    "identifiers": {
+      "isbn": "9781250275813"
+    },
+    "dateFinished": "2025-01-27",
+    "summaryEndDate": "2025-01-27",
+    "status": "finished",
+    "rating": "unrated",
+    "notes": "abc",
+    "title": "Talent",
+    "authors": [
+      "Tyler Cowen",
+      "Daniel Gross"
+    ],
+    "publishedDate": "2022-05-17",
+    "description": "Tyler Cowen and Daniel Gross's Talent offers strategies on how to spot, assess, woo, and retain highly talented people. How do you find talent with a creative spark? To what extent can you predict human creativity, or is human creativity something irreducible before our eyes, perhaps to be spotted or glimpsed by intuition, but unique each time it appears? The art and science of talent search get at exactly those questions. Renowned economist Tyler Cowen and venture capitalist and entrepreneur Daniel Gross guide the reader through the major scientific research areas relevant for talent search, including how to conduct an interview, how much to weigh intelligence, how to judge personality and match personality traits to jobs, how to evaluate talent in on-line interactions such as Zoom calls, why talented women are still undervalued and how to spot them, how to understand the special talents in people who have disabilities or supposed disabilities, and how to use delegated scouts to find talent. Identifying underrated, brilliant individuals is one of the simplest ways to give yourself an organizational edge, and this is the book that will show you how to do that. It is both for people searching for talent, and for those being searched and wish to understand how to better stand out.",
+    "pageCount": 288,
+    "format": "book",
+    "categories": [
+      "Business & Economics",
+      "Business & Economics / Management",
+      "Business & Economics / Human Resources & Personnel Management",
+      "Business & Economics / Careers / General"
+    ],
+    "thumbnail": "https://books.google.com/books/content?id=x6kbzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+    "language": "en",
+    "link": "https://books.google.com/books/about/Talent.html?hl=&id=x6kbzgEACAAJ"
   }
 ]

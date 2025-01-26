@@ -4,7 +4,7 @@ import { lookUp } from "./utils.js";
 
 export function checkOutBook(
   bookParams: BookParams,
-  library: NewBook[]
+  library: NewBook[],
 ): boolean {
   const { inputIdentifier } = bookParams;
   if (library === undefined || library.length === 0) return false;

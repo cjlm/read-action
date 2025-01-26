@@ -19,7 +19,7 @@ import {
 export function summaryMarkdown(
   library: NewBook[],
   dateType: DateTypes,
-  bookStatus: BookStatus
+  bookStatus: BookStatus,
 ): string {
   const { BookTitle } = process.env;
   const isSummary = bookStatus === "summary";
@@ -58,7 +58,7 @@ ${table}`.trim();
 
 function getUniqueYears(books: NewBook[]): string[] {
   return Array.from(
-    new Set(books.map((b) => b.dateFinished?.slice(0, 4)).filter(Boolean))
+    new Set(books.map((b) => b.dateFinished?.slice(0, 4)).filter(Boolean)),
   ) as string[];
 }
 
@@ -95,7 +95,7 @@ export function yearReviewSummary(books: NewBook[], year: string) {
 
 export function yearReview(
   books: NewBook[],
-  year: string
+  year: string,
 ): YearReview | undefined {
   if (books.length === 0) return undefined;
   const booksThisYear = bBooksThisYear(books, year);
@@ -121,11 +121,11 @@ export function yearReview(
   const mostReadMonth = getKeyFromBiggestValue(groupByMonth);
   const leastReadMonth = getKeyFromSmallestValue(groupByMonth);
   const finishedInOneDay = booksThisYear.filter(
-    (b) => b.dateStarted === b.dateFinished
+    (b) => b.dateStarted === b.dateFinished,
   );
   const topAuthors = findTopItems(booksThisYear, "authors");
   const averageFinishTime = average(
-    booksThisYear.filter((b) => b.finishTime).map((b) => b.finishTime)
+    booksThisYear.filter((b) => b.finishTime).map((b) => b.finishTime),
   );
   const bookLengthsByPageCount = booksThisYear
     .map((b) => b.pageCount)
@@ -136,7 +136,7 @@ export function yearReview(
       : undefined;
   const totalPages = bookLengthsByPageCount.reduce(
     (total: number, book: number) => book + total,
-    0
+    0,
   );
   const bookLengthsByDuration = booksThisYear
     .map((b) => b.durationSeconds)
@@ -147,7 +147,7 @@ export function yearReview(
       : undefined;
   const totalTime = bookLengthsByDuration.reduce(
     (total: number, book: number) => book + total,
-    0
+    0,
   );
 
   const tags = findTopItems(booksThisYear, "tags");
@@ -162,13 +162,13 @@ export function yearReview(
       mostReadMonth: {
         month: monthToWord[mostReadMonth],
         count: booksThisYear.filter((f) =>
-          f.dateFinished?.startsWith(`${year}-${mostReadMonth}`)
+          f.dateFinished?.startsWith(`${year}-${mostReadMonth}`),
         ).length,
       },
       leastReadMonth: {
         month: monthToWord[leastReadMonth],
         count: booksThisYear.filter((f) =>
-          f.dateFinished?.startsWith(`${year}-${leastReadMonth}`)
+          f.dateFinished?.startsWith(`${year}-${leastReadMonth}`),
         ).length,
       },
       finishedInOneDay: {
@@ -296,7 +296,7 @@ function bBooksThisYear(books: NewBook[], year: string) {
         b.dateFinished !== undefined && b.dateStarted !== undefined
           ? Math.floor(
               (Date.parse(b.dateFinished) - Date.parse(b.dateStarted)) /
-                86400000
+                86400000,
             )
           : undefined,
     }));
@@ -329,7 +329,7 @@ function bGroupByMonth(booksThisYear: NewBook[]) {
           }),
       };
     }),
-    "dateFinished"
+    "dateFinished",
   );
 }
 
@@ -351,7 +351,7 @@ const monthToWord = {
 function findTopItems(
   booksThisYear: NewBook[],
   key: string,
-  valueTransform?
+  valueTransform?,
 ): { name: string; count: number }[] {
   const items = booksThisYear
     .map((book) => book[key])

@@ -138,7 +138,7 @@ export function toArray(tags: string): BookParams["tags"] {
 
 export function lookUp(
   book: NewBook,
-  inputIdentifier: BookParams["inputIdentifier"]
+  inputIdentifier: BookParams["inputIdentifier"],
 ): boolean {
   if (inputIdentifier.startsWith("https://share.libbyapp.com/")) {
     return book.identifier === getLibbyId(inputIdentifier);

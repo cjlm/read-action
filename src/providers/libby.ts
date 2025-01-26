@@ -9,7 +9,7 @@ interface Data {
 }
 
 export async function getLibby(
-  options: BookParams
+  options: BookParams,
 ): Promise<NewBook | undefined> {
   const {
     notes,
@@ -95,7 +95,7 @@ export function parseLibbyPage(html: string | undefined): {
   const root = parse(html);
 
   const format = handleFormat(
-    root.querySelector(".share-category")?.text || ""
+    root.querySelector(".share-category")?.text || "",
   );
 
   let htmlData;

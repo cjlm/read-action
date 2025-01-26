@@ -9,7 +9,8 @@ import { summaryMarkdown } from "./summary.js";
 import returnReadFile from "./read-file.js";
 import { updateBook } from "./update-book.js";
 import { validatePayload } from "./validate-payload.js";
-import { writeBookMarkdowns } from './book-writer.js';
+import { writeBookMarkdown } from "./book-writer.js";
+import { NewBook } from "./new-book.js";
 
 export type BookPayload = {
   date: string | undefined;
@@ -25,6 +26,7 @@ export type ActionInputs = {
   filename: string;
   providers: string[];
   rating?: string;
+  "markdown-path": string;
   "time-zone": string;
   "thumbnail-width"?: number;
   "set-image": boolean;
@@ -70,13 +72,14 @@ export async function read() {
     } = payload;
     // Set inputs
     const filename: ActionInputs["filename"] = getInput("filename");
+    const markdownPath: ActionInputs["markdown-path"] = getInput("markdown-path");
     const setImage: ActionInputs["set-image"] =
       getInput("set-image") === "true";
     const providers: ActionInputs["providers"] = getInput("providers")
       ? getInput("providers").split(",")
       : new Isbn()._providers;
     const thumbnailWidth: ActionInputs["thumbnail-width"] = getInput(
-      "thumbnail-width"
+      "thumbnail-width",
     )
       ? Number.parseInt(getInput("thumbnail-width"))
       : undefined;
@@ -105,16 +108,35 @@ export async function read() {
 
     if (bookStatus !== "summary") {
       const bookExists = checkOutBook(bookParams, library);
+      let updatedBook: NewBook;
 
       if (bookExists) {
         library = await updateBook(bookParams, library);
+        const found = library.find(
+          (book) => book.identifier === inputIdentifier,
+        );
+        if (!found) {
+          throw new Error(
+            `Book with identifier ${inputIdentifier} not found after update`,
+          );
+        }
+        updatedBook = found;
       } else {
-        await handleNewBook({ bookParams, library, bookStatus, setImage });
+        const result = await handleNewBook({
+          bookParams,
+          library,
+          bookStatus,
+          setImage,
+        });
+        library = result.library;
+        updatedBook = result.newBook;
+      }
+
+      if (updatedBook) {
+        await writeBookMarkdown(markdownPath, updatedBook);
       }
 
       library = sortByDate(library);
-
-      await writeBookMarkdowns(library);
       await returnWriteFile(filename, library);
     }
 

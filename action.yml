@@ -11,6 +11,9 @@ inputs:
   filename:
     description: The file where you want to save your books.
     default: _data/read.json
+  markdown-path:
+    description: The location of the markdown version of each book.
+    default: _source/books
   providers:
     description: >-
       Specify the [ISBN

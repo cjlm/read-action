@@ -34,7 +34,7 @@ export function mGenre({ topGenres }: YearReview) {
   if (!topGenres || topGenres.length === 0) return [];
   return [
     `- **Top genre${s(topGenres.length)}:** ${and(
-      topGenres.map(({ name, count }) => `${name} (${count} book${s(count)})`)
+      topGenres.map(({ name, count }) => `${name} (${count} book${s(count)})`),
     )}`,
   ];
 }
@@ -43,7 +43,7 @@ export function mFormat({ topFormats }: YearReview) {
   if (!topFormats || topFormats.length === 0) return [];
   return [
     `- **Top format${s(topFormats.length)}:** ${and(
-      topFormats.map(({ name, count }) => `${name} (${count} book${s(count)})`)
+      topFormats.map(({ name, count }) => `${name} (${count} book${s(count)})`),
     )}`,
   ];
 }
@@ -53,7 +53,7 @@ export function mSameDay({ dates }: YearReview) {
   const { count, books } = dates.finishedInOneDay;
   return [
     `- **Read in a day:** ${and(
-      books.map((book) => `${book.title} by ${book.authors}`)
+      books.map((book) => `${book.title} by ${book.authors}`),
     )} (${count} book${s(count)})`,
   ];
 }
@@ -72,35 +72,35 @@ export function mAverageLength({ length }: YearReview): string[] {
   addBookLength(
     result,
     "Longest book by page count",
-    length.longestBookByPageCount
+    length.longestBookByPageCount,
   );
   addBookLength(
     result,
     "Shortest book by page count",
-    length.shortestBookByPageCount
+    length.shortestBookByPageCount,
   );
 
   if (length.totalPages) {
     result.push(
-      `- **Total pages read:** ${length.totalPages.toLocaleString()}`
+      `- **Total pages read:** ${length.totalPages.toLocaleString()}`,
     );
   }
 
   if (length.averageBookLengthByDuration) {
     result.push(
-      `- **Average book length by duration:** ${length.averageBookLengthByDuration}`
+      `- **Average book length by duration:** ${length.averageBookLengthByDuration}`,
     );
   }
 
   addBookDuration(
     result,
     "Longest book by duration",
-    length.longestBookByDuration
+    length.longestBookByDuration,
   );
   addBookDuration(
     result,
     "Shortest book by duration",
-    length.shortestBookByDuration
+    length.shortestBookByDuration,
   );
 
   if (length.totalTime) {
@@ -113,11 +113,11 @@ export function mAverageLength({ length }: YearReview): string[] {
 function addBookLength(
   result: string[],
   label: string,
-  book?: { title: string; authors: string; length: number | string }
+  book?: { title: string; authors: string; length: number | string },
 ) {
   if (book) {
     result.push(
-      `- **${label}:** ${book.title} by ${book.authors} (${book.length} pages)`
+      `- **${label}:** ${book.title} by ${book.authors} (${book.length} pages)`,
     );
   }
 }
@@ -125,11 +125,11 @@ function addBookLength(
 function addBookDuration(
   result: string[],
   label: string,
-  book?: { title: string; authors: string; length: number | string }
+  book?: { title: string; authors: string; length: number | string },
 ) {
   if (book) {
     result.push(
-      `- **${label}:** ${book.title} by ${book.authors} (${book.length})`
+      `- **${label}:** ${book.title} by ${book.authors} (${book.length})`,
     );
   }
 }
@@ -138,7 +138,7 @@ export function mTopAuthors({ topAuthors }: YearReview) {
   if (!topAuthors || topAuthors.length === 0) return [];
   return [
     `- **Top author${s(topAuthors.length)}:** ${and(
-      topAuthors.map(({ name, count }) => `${name} (${count} book${s(count)})`)
+      topAuthors.map(({ name, count }) => `${name} (${count} book${s(count)})`),
     )}`,
   ];
 }
@@ -147,7 +147,7 @@ export function mTags({ tags }: YearReview) {
   if (!tags || tags.length === 0) return [];
   return [
     `- **Top tag${s(tags.length)}:** ${and(
-      tags.map(({ name, count }) => `${name} (${count} book${s(count)})`)
+      tags.map(({ name, count }) => `${name} (${count} book${s(count)})`),
     )}`,
   ];
 }

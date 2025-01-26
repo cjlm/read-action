@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import { NewBook } from "./new-book.js";
 
 export default async function returnReadFile(
-  fileName: string
+  fileName: string,
 ): Promise<NewBook[]> {
   try {
     const contents = await readFile(fileName, "utf-8");
