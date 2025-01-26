@@ -558,5 +558,31 @@
       "Thriller"
     ],
     "format": "audiobook"
+  },
+  {
+    "identifier": "9780393881448",
+    "identifiers": {
+      "isbn": "9780393881448"
+    },
+    "dateFinished": "2025-01-25",
+    "summaryEndDate": "2025-01-25",
+    "status": "finished",
+    "rating": "unrated",
+    "title": "Foolproof",
+    "authors": [
+      "Sander Van Der Linden"
+    ],
+    "publishedDate": "2023-03-21",
+    "description": "One of the world’s top experts on fighting misinformation reveals the psychology behind its power—and how we can protect ourselves. From fake news to conspiracy theories, from pandemics to politics, misinformation may be the defining problem of our era. Like a virus, misinformation infects our minds—altering our beliefs and replicating at astonishing rates. Once the virus takes hold, our primary strategies of fact-checking and debunking are an ineffective cure. In Foolproof, psychologist Sander van der Linden introduces a new paradigm for combatting what the World Health Organization has declared a worldwide “infodemic.” Synthesizing decades of social psychology studies with groundbreaking original research, he explains why our brains are so susceptible to misinformation, how it spreads across social networks, and how we can cultivate immunity. The answer is the innovative science of “prebunking”—inoculating people against misinformation by preemptively exposing them to a weakened dose and teaching them to identify and fend off its manipulative tactics. With engaging case studies and practical strategies for institutions and individuals alike, Foolproof is the definitive book on resisting nefarious persuasion.",
+    "format": "book",
+    "categories": [
+      "Psychology",
+      "Psychology / Social Psychology",
+      "Political Science / Corruption & Misconduct",
+      "Psychology / Applied Psychology"
+    ],
+    "thumbnail": "https://books.google.com/books/publisher/content?id=JmWNEAAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+    "language": "en",
+    "link": "https://books.google.com/books/about/Foolproof.html?hl=&id=JmWNEAAAQBAJ"
   }
 ]
