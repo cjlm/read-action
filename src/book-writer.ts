@@ -53,9 +53,9 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 export async function writeBookMarkdown(book: NewBook): Promise<void> {
-  if (!book?.identifier) {
-    throw new Error('Book identifier is required');
-  }
+  // if (!book?.identifier) {
+  //   throw new Error('Book identifier is required');
+  // }
 
   const markdownPath = path.join('_source', 'books', `${book.identifier}.md`);
   
