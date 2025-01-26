@@ -3,29 +3,42 @@ import { NewBook } from "./new-book.js";
 import path from "path";
 import matter from "gray-matter";
 
+function sanitizeData(data: any): any {
+  if (data === null || data === undefined) return '';
+  if (Array.isArray(data)) return data.filter(item => item !== null && item !== undefined);
+  if (typeof data === 'object') {
+    return Object.fromEntries(
+      Object.entries(data)
+        .filter(([_, v]) => v !== null && v !== undefined)
+        .map(([k, v]) => [k, sanitizeData(v)])
+    );
+  }
+  return data;
+}
+
 function createBookMatter(book: NewBook): string {
-  const data = {
-    dateAdded: book.dateAdded || null,
-    dateStarted: book.dateStarted || null,
-    dateFinished: book.dateFinished || null,
-    dateAbandoned: book.dateAbandoned || null,
-    title: book.title || null,
-    authors: book.authors || [],
-    publishedDate: book.publishedDate || null,
-    categories: book.categories || [],
-    pageCount: book.pageCount || null,
-    format: book.format || null,
-    thumbnail: book.thumbnail || null,
-    language: book.language || null,
-    link: book.link || null,
+  const data = sanitizeData({
+    dateAdded: book.dateAdded,
+    dateStarted: book.dateStarted,
+    dateFinished: book.dateFinished,
+    dateAbandoned: book.dateAbandoned,
+    title: book.title,
+    authors: book.authors,
+    publishedDate: book.publishedDate,
+    categories: book.categories,
+    pageCount: book.pageCount,
+    format: book.format,
+    thumbnail: book.thumbnail,
+    language: book.language,
+    link: book.link,
     identifier: book.identifier,
-    identifiers: book.identifiers || {},
+    identifiers: book.identifiers,
     status: book.status,
-    rating: book.rating || null,
-    tags: book.tags || [],
-    image: book.image || null,
-    duration: book.duration || null
-  };
+    rating: book.rating,
+    tags: book.tags,
+    image: book.image,
+    duration: book.duration
+  });
 
   return matter.stringify(book.notes || '', data);
 }
@@ -40,6 +53,10 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 export async function writeBookMarkdown(book: NewBook): Promise<void> {
+  if (!book?.identifier) {
+    throw new Error('Book identifier is required');
+  }
+
   const markdownPath = path.join('_source', 'books', `${book.identifier}.md`);
   
   try {
@@ -48,7 +65,7 @@ export async function writeBookMarkdown(book: NewBook): Promise<void> {
     if (await fileExists(markdownPath)) {
       const existingContent = await readFile(markdownPath, 'utf-8');
       const parsed = matter(existingContent);
-      content = matter.stringify(parsed.content, book);
+      content = matter.stringify(parsed.content, sanitizeData(book));
     } else {
       content = createBookMatter(book);
     }
