@@ -59,7 +59,8 @@ export async function writeBookMarkdown(book: NewBook): Promise<void> {
 
   console.log(JSON.stringify(book))
 
-  const markdownPath = path.join('_source', 'books', `${book.isbn}.md`);
+  // const markdownPath = path.join('_source', 'books', `${book.identifier}.md`);
+  const markdownPath = path.join(`${book.identifier}.md`);
   
   try {
     let content: string;
