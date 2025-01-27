@@ -3,7 +3,7 @@ import { NewBook } from "./new-book.js";
 
 export default async function returnWriteFile(
   fileName: string,
-  bookMetadata: NewBook[]
+  bookMetadata: NewBook[],
 ) {
   try {
     const promise = writeFile(fileName, JSON.stringify(bookMetadata, null, 2));

@@ -10,7 +10,7 @@ import { NewBook } from "../new-book.js";
 import { Audiobook } from "schema-dts";
 
 export async function getAppleBooks(
-  options: BookParams
+  options: BookParams,
 ): Promise<NewBook | undefined> {
   const {
     notes,
@@ -48,7 +48,7 @@ export async function getAppleBooks(
     };
   } catch (error) {
     throw new Error(
-      `Failed to get book from Apple Books: ${error.result.error}`
+      `Failed to get book from Apple Books: ${error.result.error}`,
     );
   }
 }

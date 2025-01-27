@@ -11,5 +11,5 @@ export default tseslint.config(
   {
     files: ["__tests__/**"],
     ...jest.configs["flat/recommended"],
-  }
+  },
 );

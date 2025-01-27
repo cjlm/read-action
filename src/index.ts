@@ -9,7 +9,8 @@ import { summaryMarkdown } from "./summary.js";
 import returnReadFile from "./read-file.js";
 import { updateBook } from "./update-book.js";
 import { validatePayload } from "./validate-payload.js";
-import { writeBookMarkdown } from './book-writer.js';
+import { writeBookMarkdown } from "./book-writer.js";
+import { NewBook } from "./new-book.js";
 
 export type BookPayload = {
   date: string | undefined;
@@ -76,7 +77,7 @@ export async function read() {
       ? getInput("providers").split(",")
       : new Isbn()._providers;
     const thumbnailWidth: ActionInputs["thumbnail-width"] = getInput(
-      "thumbnail-width"
+      "thumbnail-width",
     )
       ? Number.parseInt(getInput("thumbnail-width"))
       : undefined;
@@ -106,12 +107,25 @@ export async function read() {
     if (bookStatus !== "summary") {
       const bookExists = checkOutBook(bookParams, library);
       let updatedBook: NewBook;
-      
+
       if (bookExists) {
         library = await updateBook(bookParams, library);
-        updatedBook = library.find(book => book.identifier === inputIdentifier);
+        const found = library.find(
+          (book) => book.identifier === inputIdentifier,
+        );
+        if (!found) {
+          throw new Error(
+            `Book with identifier ${inputIdentifier} not found after update`,
+          );
+        }
+        updatedBook = found;
       } else {
-        const result = await handleNewBook({ bookParams, library, bookStatus, setImage });
+        const result = await handleNewBook({
+          bookParams,
+          library,
+          bookStatus,
+          setImage,
+        });
         library = result.library;
         updatedBook = result.newBook;
       }
@@ -119,7 +133,7 @@ export async function read() {
       if (updatedBook) {
         await writeBookMarkdown(updatedBook);
       }
-      
+
       library = sortByDate(library);
       await returnWriteFile(filename, library);
     }

@@ -71,12 +71,17 @@ export async function handleNewBook({
   library: NewBook[];
   bookStatus: string;
   setImage: boolean;
-}): Promise<void> {
+}): Promise<{ library: NewBook[]; newBook: NewBook }> {
   const newBook = await (providerAction
     .find(({ check }) => check(bookParams.inputIdentifier))
     ?.action(bookParams) as Promise<NewBook>);
 
+  if (!newBook) {
+    throw new Error("Failed to get book data");
+  }
+
   library.push(newBook);
+
   exportVariable(`BookTitle`, newBook.title);
 
   if (bookStatus === "started") {
@@ -96,7 +101,7 @@ export async function handleNewBook({
     exportVariable(`BookThumbOutput`, newBook.image);
     exportVariable(`BookThumb`, encode(newBook.thumbnail));
   }
-  return { newBook, library }
+  return { newBook, library };
 }
 
 function encode(url: string): string {

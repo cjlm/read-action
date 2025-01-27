@@ -6,7 +6,7 @@ import { exportVariable, getInput, warning } from "@actions/core";
 
 export async function getIsbn(
   options: BookParams,
-  isLibrofm = false
+  isLibrofm = false,
 ): Promise<NewBook> {
   const { inputIdentifier, providers } = options;
   let book;
@@ -93,7 +93,7 @@ export function cleanBook(options: BookParams, book: Book): NewBook {
 
 function handleThumbnail(
   thumbnailWidth: number | undefined,
-  thumbnail: string
+  thumbnail: string,
 ) {
   if (thumbnail.startsWith("http:")) {
     thumbnail = thumbnail.replace("http:", "https:");
