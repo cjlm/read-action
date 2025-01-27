@@ -102,7 +102,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Read
-        uses: library-pals/read-action@v9.4.0
+        uses: cjlm/read-action@v9.4.0
 
       - name: Commit updated read file
         if: env.BookStatus != 'summary'
@@ -188,7 +188,7 @@ jobs:
         id: read_action
         with:
           set-image: true
-        uses: library-pals/read-action@v9.4.0
+        uses: cjlm/read-action@v9.4.0
 
       - name: Download the book thumbnail
         if: env.BookThumbOutput != ''
@@ -298,7 +298,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Read
-        uses: library-pals/read-action@v9.4.0
+        uses: cjlm/read-action@v9.4.0
         with:
           thumbnail-width: 1280
           set-image: true
@@ -321,6 +321,8 @@ jobs:
 ## Action options
 
 - `filename`: The file where you want to save your books. Default: `_data/read.json`.
+
+- `markdown-path`: The location of the markdown version of each book. Default: `_source/books`.
 
 - `providers`: Specify the [ISBN providers](https://github.com/library-pals/isbn?tab=readme-ov-file#setting-backend-providers) that you want to use, in the order you need them to be invoked. If setting more than one provider, separate each with a comma.
 
