@@ -37,7 +37,7 @@ async function fileExists(filePath: string): Promise<boolean> {
   }
 }
 
-export async function writeBookMarkdown(book: NewBook): Promise<void> {
+export async function writeBookMarkdown(markdownPath: string, book: NewBook): Promise<void> {
   if (!book?.identifier) {
     throw new Error("Book identifier is required");
   }
@@ -47,20 +47,20 @@ export async function writeBookMarkdown(book: NewBook): Promise<void> {
       ?.toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "") || book.identifier;
-  const markdownPath = path.join("_source", "books", `${slug}.md`);
+  const markdownFilePath = path.join(markdownPath, `${slug}.md`);
 
   try {
     let content: string;
 
-    if (await fileExists(markdownPath)) {
-      const existingContent = await readFile(markdownPath, "utf-8");
+    if (await fileExists(markdownFilePath)) {
+      const existingContent = await readFile(markdownFilePath, "utf-8");
       const parsed = matter(existingContent);
       content = matter.stringify(parsed.content, sanitizeData(book) as NewBook);
     } else {
       content = createBookMatter(book);
     }
 
-    await writeFile(markdownPath, content);
+    await writeFile(markdownFilePath, content);
   } catch (error) {
     throw new Error(
       `Failed to write markdown for book ${book.identifier}: ${error instanceof Error ? error.message : String(error)}`,

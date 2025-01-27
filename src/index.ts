@@ -26,6 +26,7 @@ export type ActionInputs = {
   filename: string;
   providers: string[];
   rating?: string;
+  "markdown-path": string;
   "time-zone": string;
   "thumbnail-width"?: number;
   "set-image": boolean;
@@ -71,6 +72,7 @@ export async function read() {
     } = payload;
     // Set inputs
     const filename: ActionInputs["filename"] = getInput("filename");
+    const markdownPath: ActionInputs["markdown-path"] = getInput("markdown-path");
     const setImage: ActionInputs["set-image"] =
       getInput("set-image") === "true";
     const providers: ActionInputs["providers"] = getInput("providers")
@@ -131,7 +133,7 @@ export async function read() {
       }
 
       if (updatedBook) {
-        await writeBookMarkdown(updatedBook);
+        await writeBookMarkdown(markdownPath, updatedBook);
       }
 
       library = sortByDate(library);
