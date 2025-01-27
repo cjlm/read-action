@@ -9,7 +9,7 @@ import { summaryMarkdown } from "./summary.js";
 import returnReadFile from "./read-file.js";
 import { updateBook } from "./update-book.js";
 import { validatePayload } from "./validate-payload.js";
-import { writeBookMarkdowns } from './book-writer.js';
+import { writeBookMarkdown } from './book-writer.js';
 
 export type BookPayload = {
   date: string | undefined;
@@ -105,16 +105,22 @@ export async function read() {
 
     if (bookStatus !== "summary") {
       const bookExists = checkOutBook(bookParams, library);
-
+      let updatedBook: NewBook;
+      
       if (bookExists) {
         library = await updateBook(bookParams, library);
+        updatedBook = library.find(book => book.identifier === inputIdentifier);
       } else {
-        await handleNewBook({ bookParams, library, bookStatus, setImage });
+        const result = await handleNewBook({ bookParams, library, bookStatus, setImage });
+        library = result.library;
+        updatedBook = result.newBook;
       }
 
+      if (updatedBook) {
+        await writeBookMarkdown(updatedBook);
+      }
+      
       library = sortByDate(library);
-
-      await writeBookMarkdowns(library);
       await returnWriteFile(filename, library);
     }
 

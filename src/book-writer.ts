@@ -3,13 +3,17 @@ import { NewBook } from "./new-book.js";
 import path from "path";
 import matter from "gray-matter";
 
-function sanitizeData(data: any): any {
+interface DataObject {
+  [key: string]: unknown;
+}
+
+function sanitizeData(data: unknown): string | unknown[] | DataObject | unknown {
   if (data === null || data === undefined) return '';
   if (Array.isArray(data)) return data.filter(item => item !== null && item !== undefined);
   if (typeof data === 'object') {
     return Object.fromEntries(
-      Object.entries(data)
-        .filter(([_, v]) => v !== null && v !== undefined)
+      Object.entries(data as DataObject)
+        .filter(([, v]) => v !== null && v !== undefined)
         .map(([k, v]) => [k, sanitizeData(v)])
     );
   }
@@ -53,14 +57,17 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 export async function writeBookMarkdown(book: NewBook): Promise<void> {
-  // if (!book?.identifier) {
-  //   throw new Error('Book identifier is required');
-  // }
-
-  console.log(JSON.stringify(book))
+  if (!book?.identifier) {
+    throw new Error('Book identifier is required');
+  }
 
   // const markdownPath = path.join('_source', 'books', `${book.identifier}.md`);
-  const markdownPath = path.join(`${book.identifier}.md`);
+  const slug = book.title?.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '') || book.identifier;
+  const markdownPath = path.join('_source', 'books', `${slug}.md`);
+  
+
   
   try {
     let content: string;

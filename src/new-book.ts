@@ -96,6 +96,7 @@ export async function handleNewBook({
     exportVariable(`BookThumbOutput`, newBook.image);
     exportVariable(`BookThumb`, encode(newBook.thumbnail));
   }
+  return { newBook, library }
 }
 
 function encode(url: string): string {
