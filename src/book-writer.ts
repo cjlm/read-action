@@ -24,8 +24,8 @@ function sanitizeData(
 }
 
 function createBookMatter(book: NewBook): string {
-  const data = sanitizeData(book) as NewBook;
-  return matter.stringify(book.notes || "", data);
+  const { dateFinished: date, format, rating, title, authors, thumbnail: image, identifier: isbn } = sanitizeData(book) as NewBook;
+  return matter.stringify(book.notes || "", { title, author: (authors as string[]).join(', '), isbn, image, format, date, rating });
 }
 
 async function fileExists(filePath: string): Promise<boolean> {
