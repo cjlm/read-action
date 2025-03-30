@@ -129006,6 +129006,9 @@ function handleThumbnail(thumbnailWidth, thumbnail) {
     }
     const url = new URL(thumbnail);
     if (url.host === "books.google.com" && thumbnailWidth) {
+        // Remove any existing zoom parameter
+        thumbnail = thumbnail.replace(/zoom=\d+/, "zoom=5");
+        // Add width parameter for additional control
         thumbnail = `${thumbnail}&w=${thumbnailWidth}`;
     }
     return thumbnail;
